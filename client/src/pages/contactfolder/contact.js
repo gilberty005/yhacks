@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./contact.css";
 
-// Define your JSON data directly in your code
 const initialFormData = {
   age: "",
   subject: "",
@@ -14,17 +13,29 @@ export function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const updatedValue = name === 'lesson_plan' && value.trim() === '' ? 'None' : value;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: name === 'lesson_plan' ? value.replace(/\n/g, ' ') : value
+      [name]: name === 'lesson_plan' ? updatedValue.replace(/\n/g, ' ') : updatedValue
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Serialize form data to JSON
-    const jsonData = JSON.stringify(formData, null, 2);
-    console.log(jsonData);
+    const jsonData = JSON.stringify(formData);
+    try {
+      const response = await fetch("http://127.0.0.1:5000/members", { // Ensure this URL matches your Flask server's address
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonData,
+      });
+      const data = await response.json();
+      console.log(data);  // Log the server response for demonstration purposes
+    } catch (error) {
+      console.error("Error posting form data:", error);
+    }
   };
 
   return (
@@ -70,7 +81,7 @@ export function Contact() {
             <input
               type="submit"
               className="submit focus-style"
-              value="Save JSON"
+              value="Make a Video!"
             />
           </form>
         </div>
