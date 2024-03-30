@@ -44,7 +44,7 @@
     width: 100%;
     min-height: 50px;
     font-family: var(--font-family);
-    font-weight: 400;
+    font-weight: 600;
     font-size: 20px;
     line-height: 28px;
     background: var(--color-footer);
@@ -62,8 +62,8 @@
     width: auto;
     min-height: 50px;
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 800;
+    font-size: 24px;
     line-height: 28px;
     background: #742087;
     border: 2px solid #742087;
@@ -76,6 +76,11 @@
     border-bottom-right-radius: 5px;
 }
 
+p.subtext {
+    font-size: 24px;
+    font-weight: 900;
+}
+
 .gilbert__header-image {
     flex: 1;
     max-width: 40%;
@@ -83,6 +88,7 @@
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
 }
+
 
 .gilbert__header-image img {
     width: 100%;
@@ -142,3 +148,7 @@
         line-height: 16px;
     }
 }
+    .edu-btn,
+    .stu-btn {
+    margin-right: 50px;
+    }

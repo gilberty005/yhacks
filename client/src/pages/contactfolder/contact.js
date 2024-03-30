@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./contact.css";
 
 const initialFormData = {
-  age: "",
+  age_group: "",
   subject: "",
   topic: "",
-  lesson_plan: ""
+  lesson_plan: "",
+  responseMessage: "" 
 };
 
 export function Contact() {
@@ -32,7 +33,8 @@ export function Contact() {
         body: jsonData,
       });
       const data = await response.json();
-      console.log(data);  // Log the server response for demonstration purposes
+      console.log(data);  
+      setFormData(prevData => ({ ...prevData, responseMessage: data.data }));  // Update state with backend response
     } catch (error) {
       console.error("Error posting form data:", error);
     }
@@ -47,10 +49,10 @@ export function Contact() {
             <label htmlFor="age">Age:</label><br />
             <input
               type="number"
-              id="age"
-              name="age"
+              id="age_group"
+              name="age_group"
               required
-              value={formData.age}
+              value={formData.age_group}
               onChange={handleChange}
             /><br />
             <label htmlFor="subject">Subject:</label><br />
@@ -85,7 +87,14 @@ export function Contact() {
             />
           </form>
         </div>
-      </div>
-    </>
-  );
+        
+        {formData.responseMessage && (
+        <div className="response-container">
+          <h3>Response from Server:</h3>
+          <p>{formData.responseMessage}</p>
+        </div>
+      )}
+    </div>
+  </>
+);
 }

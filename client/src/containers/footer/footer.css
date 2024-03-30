@@ -29,11 +29,11 @@
     margin: 1rem;
 }
 
-.gilbert__footer-links_logo p {
+.gilbert__footer-links_logo {
     font-family: var(--font-family);
     font-size: 15px;
     line-height: 15px;
-    color: #fff;
+    color: #fff; 
 }
 
 .gilbert__footer-links_social {
