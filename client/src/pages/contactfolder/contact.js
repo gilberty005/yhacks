@@ -16,7 +16,7 @@ export function Contact() {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: name === 'lesson_plan' ? value.replace(/\n/g, ' ') : value
     }));
   };
 
@@ -31,7 +31,7 @@ export function Contact() {
     <>
       <div className="content-container">
         <div className="form-container">
-          <h2 className="gradient__text">Let's Connect!</h2>
+          <h2 className="gradient__text">Let's Get Your Lesson Plan Done!</h2>
           <form onSubmit={handleSubmit} className="contact-form">
             <label htmlFor="age">Age:</label><br />
             <input
@@ -51,7 +51,7 @@ export function Contact() {
               value={formData.subject}
               onChange={handleChange}
             /><br /><br />
-            <label htmlFor="topic">Lesson Plan:</label><br />
+            <label htmlFor="topic">Topic:</label><br />
             <input
               type="text"
               id="topic"
@@ -61,8 +61,7 @@ export function Contact() {
               onChange={handleChange}
             /><br /><br />
             <label htmlFor="lesson_plan">Lesson Plan:</label><br />
-            <input
-              type="text"
+            <textarea
               id="lesson_plan"
               name="lesson_plan"
               value={formData.lesson_plan}
