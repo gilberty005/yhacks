@@ -64,6 +64,24 @@ def betterFindAll(totalText, startKey, endKey):
                 list.append(totalText[i:i+len(startKey)+subtext.index(endKey)])
     return list
 
+def generateImage(prompt):
+    return client.images.generate(
+        model="dall-e-3",
+        prompt=prompt,
+        size="1792x1024",
+        quality="standard",
+        n=1,
+        )
+
+def generateTTS(prompt,name,voice):
+    with client.audio.speech.with_streaming_response.create(
+        model="tts-1",
+        voice=voice,
+        input=prompt,
+        response_format='mp3'
+    ) as response:
+        response.stream_to_file(name)
+
 
 @app.route("/members", methods=['GET', 'POST'])
 def members():

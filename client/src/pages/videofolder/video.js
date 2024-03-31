@@ -28,22 +28,27 @@ const Video = () => {
     };
 
     return (
-        <div>
-            <h1>Let's Make Some Video Magic Happen!</h1>
-            <p>Freely edit the script before it gets turned into a video!</p>
-            <form onSubmit={handleSubmit}>
-            <textarea
-                defaultValue={generatedText}
-                onChange={handleChange}
-            ></textarea>
-            <br></br>
-            <input
-                type="submit"
-                className="submit-plan-style"
-                value="GENERATE VIDEO"
-            />
-            </form>
-        </div>
+        <>
+            <div className="content-container">
+                <div className="form-container">
+                    <h1 className="script-intro">Let's Make Some Video Magic Happen!</h1>
+                    <p className="script-subintro">Freely edit the script before it gets turned into a video!</p>
+                    <form onSubmit={handleSubmit} className="contact-form">
+                        <textarea 
+                            defaultValue={generatedText} 
+                            onChange={handleChange}
+                            className="script-textbox"
+                        ></textarea>
+                        <br />
+                        <input
+                            type="submit"
+                            value="GENERATE VIDEO"
+                            className="submit-focus-style"
+                        />
+                    </form>
+                </div>
+            </div>
+        </>
     );
 };
 

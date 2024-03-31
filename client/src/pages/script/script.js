@@ -45,22 +45,27 @@ const Script = () => {
   };
 
   return (
-    <div>
-      <h1>Let's Make Some Script Magic Happen!</h1>
-      <p>Freely edit the lesson plan before it gets turned into a script!</p>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <textarea
-          defaultValue={generatedText}
-          onChange={handleChange}
-        ></textarea>
-        <br></br>
-        <input
-          type="submit"
-          className="submit-plan-style"
-          value="GENERATE SCRIPT"
-        />
-      </form>
-    </div>
+    <>
+      <div className="content-container">
+        <div className="form-container">
+          <h1 className="script-intro">Let's Make Some Script Magic Happen!</h1>
+          <p className="script-subintro">Welcome to the Script Page. You can put your script-related content here.</p>
+          <form onSubmit={handleSubmit} className="contact-form">
+            <textarea 
+              defaultValue={generatedText} 
+              onChange={handleChange}
+              className="script-textbox"
+            ></textarea>
+            <br />
+            <input
+              type="submit"
+              value="GENERATE SCRIPT"
+              className="submit-focus-style"
+            />
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 

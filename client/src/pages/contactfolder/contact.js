@@ -51,8 +51,8 @@ export function Contact() {
     <>
       <div className="content-container">
         <div className="form-container">
-          <h1 className="contact-heading">This is the Lesson page</h1>
-          <p className="contact-subheading">Welcome to the Lesson Page. You can put your lesson-related content here.</p>
+          <h1 className="script-intro">Let's Make Some Lesson Magic Happen!</h1>
+          <p className="script-subintro">Welcome to the Lesson Page. You can put your lesson-related content here.</p>
           <form onSubmit={handleSubmit} className="contact-form">
             <label htmlFor="age">AGE</label><br />
             <input
