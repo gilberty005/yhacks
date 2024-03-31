@@ -1,18 +1,63 @@
-import React from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import './script.css';
+
+const initialFormData = {
+  lesson_plan: "",
+};
 
 const Script = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { generatedText } = location.state || { generatedText: "" }; // Fallback to empty string if state is undefined
+  const [formData, setFormData] = useState({ ...initialFormData, lesson_plan: generatedText });
 
-  // Use generatedText as initial form value or display it directly
+  const handleChange = (e) => {
+    const lessonPlan = e.target.value;
+    // If the textarea is empty, replace it with a default string
+    const updatedPlan = lessonPlan.trim() === '' ? 'None' : lessonPlan.replace(/\n/g, ' ');
+    setFormData({ lesson_plan: updatedPlan });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const jsonData = JSON.stringify(formData);
+    try {
+      const response = await fetch('http://127.0.0.1:5000/generate_script', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonData
+      });
+      if (response.ok) { 
+        const data = await response.json();
+        console.log(data);
+        localStorage.setItem('formData', jsonData);
+      } else {
+        console.error("Server responded with status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error posting form data:", error);
+    }
+  };
+
   return (
     <div>
-      <h1>This is the Script Page</h1>
-      <p>Welcome to the Script Page. You can put your script-related content here.</p>
-      {/* Display the text or use it as part of a form */}
-      <textarea defaultValue={generatedText}></textarea>
+      <h1>Let's Make Some Video Magic Happen!</h1>
+      <p>Freely edit the lesson plan before it gets turned into a script and video!</p>
+      <form onSubmit={handleSubmit} className="contact-form">
+        <textarea
+          defaultValue={generatedText}
+          onChange={handleChange}
+        ></textarea>
+        <br></br>
+        <input
+          type="submit"
+          className="submit-plan-style"
+          value="GENERATE VIDEO"
+        />
+      </form>
     </div>
   );
 };

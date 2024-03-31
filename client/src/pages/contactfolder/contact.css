@@ -9,7 +9,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 0;
 }   
 
 .contact-form {
@@ -40,7 +39,7 @@
 input,
 textarea {
     background-color: #1d1836;
-    width: 90%;
+    width: 70%;
     margin-top: 1rem; 
     border: 5px solid black; 
     border-radius: 50px; 
@@ -56,10 +55,11 @@ textarea:focus {
 
 .submit-focus-style {
     border: 1px solid white;
-    width: 40%;
-    padding: 16px;
+    width: 60%;
+    color: var(--gradient-text);
+    padding: 12px;
     text-align: center;
-    background-color: #742087;
+    background-color: var(--gradient-bg);
     cursor: pointer;
 }
 

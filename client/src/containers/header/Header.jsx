@@ -44,14 +44,14 @@ const Header = () => (
       <div className="gilbert__header-content">
         <h1 className="gradient__text">Hi, there!</h1>
           <h1 className="gradient__text">
-              You are a ...
+              You need a ...
           </h1>
         
         <div className="gilbert__header-content__input">
-          <Link to="/contact"><button className="edu-btn" type="button">Educator</button></Link>
-          <Link to="/contact"><button className="stu-btn" type="button">Student</button></Link>
+          <Link to="/contact"><button className="edu-btn" type="button">Lesson Plan</button></Link>
+          <Link to="/script"><button className="stu-btn" type="button">Script/Video</button></Link>
         </div>
-          <p className='subtext'>Welcome to the Future of Education</p>
+          <p className='subtext'>Welcome to the Future of Education!</p>
           <p className='subtext'>
           <TypingText />
         </p>

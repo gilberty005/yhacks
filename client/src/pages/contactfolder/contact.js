@@ -56,10 +56,11 @@ export function Contact() {
             <label htmlFor="age">AGE</label><br />
             <input
               type="number"
-              min={0}
+              min={1}
               max={100}
               id="age_group"
               name="age_group"
+              placeholder="Student's Age"
               required
               value={formData.age_group}
               onChange={handleChange}
@@ -73,6 +74,7 @@ export function Contact() {
               id="subject"
               name="subject"
               required
+              placeholder="e.g. Math, History, etc."
               value={formData.subject}
               onChange={handleChange}
             /><br /><br />
@@ -83,13 +85,14 @@ export function Contact() {
               maxLength={50}
               name="topic"
               required
+              placeholder="e.g. Photosynthesis, etc."
               value={formData.topic}
               onChange={handleChange}
-            /><br /><br />
+            /><br />
             <input
               type="submit"
               className="submit-focus-style"
-              value="MAKE A LESSON PLAN!"
+              value="GENERATE LESSON PLAN"
             />
           </form>
         </div>
