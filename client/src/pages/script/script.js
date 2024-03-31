@@ -34,6 +34,8 @@ const Script = () => {
         const data = await response.json();
         console.log(data);
         localStorage.setItem('formData', jsonData);
+
+        navigate('/video', { state: { generatedText: data.data } });
       } else {
         console.error("Server responded with status:", response.status);
       }
@@ -44,8 +46,8 @@ const Script = () => {
 
   return (
     <div>
-      <h1>Let's Make Some Video Magic Happen!</h1>
-      <p>Freely edit the lesson plan before it gets turned into a script and video!</p>
+      <h1>Let's Make Some Script Magic Happen!</h1>
+      <p>Freely edit the lesson plan before it gets turned into a script!</p>
       <form onSubmit={handleSubmit} className="contact-form">
         <textarea
           defaultValue={generatedText}
@@ -55,7 +57,7 @@ const Script = () => {
         <input
           type="submit"
           className="submit-plan-style"
-          value="GENERATE VIDEO"
+          value="GENERATE SCRIPT"
         />
       </form>
     </div>

@@ -5,6 +5,7 @@ import { Contact } from './pages/contactfolder/contact';
 import Footer from './containers/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import ScriptPage from './pages/script/script.js';
+import Video from './pages/videofolder/video.js'
 
 const App = ( ) => {
   return (
@@ -14,6 +15,7 @@ const App = ( ) => {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/script" element={<ScriptPage />} />
+        <Route path="/video" element = {<Video />} /> 
       </Routes>
       <Footer />
     </Router>

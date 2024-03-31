@@ -9,6 +9,7 @@ const Menu = () => (
     <p><Link to="/">Home</Link></p>
     <p><Link to="/contact">Lesson Generator</Link></p>
     <p><Link to="/script">Script Generator</Link></p>
+    <p><Link to="/video">Video Generator</Link></p>
     </>
 );
 

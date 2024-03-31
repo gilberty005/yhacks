@@ -48,11 +48,12 @@ const Header = () => (
           </h1>
         
         <div className="gilbert__header-content__input">
-          <Link to="/contact"><button className="edu-btn" type="button">Lesson Plan</button></Link>
-          <Link to="/script"><button className="stu-btn" type="button">Script/Video</button></Link>
+          <Link to="/contact"><button className="edu-btn" type="button">Lesson</button></Link>
+          <Link to="/script"><button className="stu-btn" type="button">Script</button></Link>
+          <Link to="/video"><button className="stu-btn" type="button">Video</button></Link>
         </div>
           <p className='subtext'>Welcome to the Future of Education!</p>
-          <p className='subtext'>
+          <p className='quote'>
           <TypingText />
         </p>
       </div>

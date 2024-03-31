@@ -169,7 +169,7 @@ def generate_script():
 
         response_content = get_completion_from_messages(messages)
         
-        return jsonify({"status": "success", "script": response_content}), 200
+        return jsonify({"status": "success", "data": response_content}), 200
     else:
         return jsonify({"ERROR": ["ERROR IN INPUT"]})
 

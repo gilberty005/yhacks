@@ -51,7 +51,8 @@ export function Contact() {
     <>
       <div className="content-container">
         <div className="form-container">
-          <h1 className="gradient__text">Let's Get Your Lesson Plan Done!</h1>
+          <h1 className="contact-heading">This is the Lesson page</h1>
+          <p className="contact-subheading">Welcome to the Lesson Page. You can put your lesson-related content here.</p>
           <form onSubmit={handleSubmit} className="contact-form">
             <label htmlFor="age">AGE</label><br />
             <input
@@ -60,7 +61,7 @@ export function Contact() {
               max={100}
               id="age_group"
               name="age_group"
-              placeholder="Student's Age"
+              placeholder="e.g. 10, 16, etc."
               required
               value={formData.age_group}
               onChange={handleChange}
