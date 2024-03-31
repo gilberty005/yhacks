@@ -3,54 +3,45 @@ import './videoplayer.css';
 
 function Gallery() {
   const [images, setImages] = useState([
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-0pR51GYuWnsS4AUgcXEieEFJ.png?st=2024-03-31T09%3A25%3A06Z&se=2024-03-31T11%3A25%3A06Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A24%3A59Z&ske=2024-04-01T00%3A24%3A59Z&sks=b&skv=2021-08-06&sig=vwt9vHsx2pUOSPpVdYFjVOnPBXmwmQQ9indOzExgw1Q%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-n0KswoaYHdtHohybVQBLp5nD.png?st=2024-03-31T09%3A25%3A25Z&se=2024-03-31T11%3A25%3A25Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A10%3A36Z&ske=2024-04-01T00%3A10%3A36Z&sks=b&skv=2021-08-06&sig=iYb69ZtGGS/STVXLYCq5wAbEn2gmqRP0uVD9hySKh1k%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-Vj46vC9XE3ZRAEWxKNVOkBKd.png?st=2024-03-31T09%3A25%3A39Z&se=2024-03-31T11%3A25%3A39Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A44%3A23Z&ske=2024-04-01T00%3A44%3A23Z&sks=b&skv=2021-08-06&sig=NWITQcgPF/impTstm461PrnOARlYBgG2qWkomni7tKw%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-4a6W7So70Qx55SQ2UL2dVlB4.png?st=2024-03-31T09%3A25%3A53Z&se=2024-03-31T11%3A25%3A53Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A07%3A34Z&ske=2024-04-01T00%3A07%3A34Z&sks=b&skv=2021-08-06&sig=xFR%2BodErKwxn4NNdmql7vsBEFieq3BcG9cJD7sjF/70%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-6ZpfYtwhvPhq1KXUQPaEvIjW.png?st=2024-03-31T09%3A26%3A06Z&se=2024-03-31T11%3A26%3A06Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T10%3A13%3A51Z&ske=2024-04-01T10%3A13%3A51Z&sks=b&skv=2021-08-06&sig=A1gAxWm9nvfakP25kFqtvD03a/kOO3CcXcDb8CBMQZ0%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-66jlQOtOX8QwTlcNGRXnpyeV.png?st=2024-03-31T09%3A26%3A22Z&se=2024-03-31T11%3A26%3A22Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A19%3A51Z&ske=2024-04-01T00%3A19%3A51Z&sks=b&skv=2021-08-06&sig=h2l8YGZzlG8MNPvYVkyECNxFcKBDtq7ijtioD/RbkWk%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-8qRl5X9cNtRL1fbUj558hpwG.png?st=2024-03-31T09%3A26%3A38Z&se=2024-03-31T11%3A26%3A38Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A35%3A07Z&ske=2024-04-01T00%3A35%3A07Z&sks=b&skv=2021-08-06&sig=mO0MiKCZw8U0ou4jbbUWIAnXZEaClFfXxUIupSS1mTU%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-E54gWYWpL88diChGiqI21Rc6.png?st=2024-03-31T09%3A26%3A53Z&se=2024-03-31T11%3A26%3A53Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A06%3A40Z&ske=2024-04-01T00%3A06%3A40Z&sks=b&skv=2021-08-06&sig=eQ171vk40qNzKWOoXYOXt5pWI10Za5uPsV2w8S0WKKw%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-ib2VSHs87RzJxQeJoJe7TIEr.png?st=2024-03-31T09%3A27%3A04Z&se=2024-03-31T11%3A27%3A04Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A09%3A07Z&ske=2024-04-01T00%3A09%3A07Z&sks=b&skv=2021-08-06&sig=DEQbWIsQSkgD7ox14GA7OnRTUDOMeFLv/csn8RXbeGk%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-RxtxtN0fncn0RlW939gghW0a.png?st=2024-03-31T09%3A27%3A21Z&se=2024-03-31T11%3A27%3A21Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-30T11%3A37%3A03Z&ske=2024-03-31T11%3A37%3A03Z&sks=b&skv=2021-08-06&sig=GyH8PJoHoS0AnAdZgWg62v%2BzfS/w0Kqs8/0lyoEbrkg%3D",
-    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-lRYk8QyXjMEhVD4UgZVh7sXa.png?st=2024-03-31T09%3A27%3A35Z&se=2024-03-31T11%3A27%3A35Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A25%3A30Z&ske=2024-04-01T00%3A25%3A30Z&sks=b&skv=2021-08-06&sig=GhZAzJuUIIE%2ByDCjRUXMK89TDni2ylBHmgs1bBo9MoI%3D"
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-sxKGGVvG0iUKeaWlUJCBINxH.png?st=2024-03-31T13%3A35%3A43Z&se=2024-03-31T15%3A35%3A43Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A07%3A27Z&ske=2024-04-01T00%3A07%3A27Z&sks=b&skv=2021-08-06&sig=79RpuaegfKUntu/bc9iN/bFzLBnwjxOe/4GuVYSrOLw%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-Vf0MaMha1bXom7Sdhqd8ROry.png?st=2024-03-31T13%3A36%3A01Z&se=2024-03-31T15%3A36%3A01Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-30T22%3A53%3A02Z&ske=2024-03-31T22%3A53%3A02Z&sks=b&skv=2021-08-06&sig=1ab8mAU3W8VOvCiaSL4A/5KhOwMv8ytTzPUn4EbYUT0%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-rOm6e2euv1AXdsdSFiYwvx1a.png?st=2024-03-31T13%3A36%3A14Z&se=2024-03-31T15%3A36%3A14Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A31%3A46Z&ske=2024-04-01T00%3A31%3A46Z&sks=b&skv=2021-08-06&sig=a%2BjVda6r254/0QZS4ibWdhmUbWiKbVIgv4W/SSa1pvY%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-FnsqvCQVaH61PGrpquxNrZMV.png?st=2024-03-31T13%3A36%3A28Z&se=2024-03-31T15%3A36%3A28Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A50%3A11Z&ske=2024-04-01T00%3A50%3A11Z&sks=b&skv=2021-08-06&sig=/tyOSIDGZLURHL6GGdaCSGEm4jNilq8sK3Dy5XW1L54%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-lXyXDeuInuG0i9c01MkF5QnA.png?st=2024-03-31T13%3A36%3A41Z&se=2024-03-31T15%3A36%3A41Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T01%3A00%3A32Z&ske=2024-04-01T01%3A00%3A32Z&sks=b&skv=2021-08-06&sig=523aVUt15jv/DcRf033wyIyt440k2F4XBTU83Ny/gr0%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-7seCnmwGSm4WNspfBGg1vV0v.png?st=2024-03-31T13%3A36%3A55Z&se=2024-03-31T15%3A36%3A55Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A20%3A07Z&ske=2024-04-01T00%3A20%3A07Z&sks=b&skv=2021-08-06&sig=NOpIcABkVkdPZW6qgWPQqCaHxObDuEkErzwodNgJVjw%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-lUmVt1zwGh2GOG5RJkq04Qcz.png?st=2024-03-31T13%3A37%3A10Z&se=2024-03-31T15%3A37%3A10Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A28%3A23Z&ske=2024-04-01T00%3A28%3A23Z&sks=b&skv=2021-08-06&sig=PmQHavjq1lAIc%2BXdUa//ctHmpXkG4xPIIZ6oXOW4awE%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-pP8JkhiuvtGYnF1I3eEtCMDX.png?st=2024-03-31T13%3A37%3A27Z&se=2024-03-31T15%3A37%3A27Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A15%3A26Z&ske=2024-04-01T00%3A15%3A26Z&sks=b&skv=2021-08-06&sig=fIK09yjtZPtf1iZJwsprR7Q44OzC1AlnVgmneVvKP5E%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-NB76gstdvR1LsELhGt1ZMNsj.png?st=2024-03-31T13%3A37%3A46Z&se=2024-03-31T15%3A37%3A46Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A25%3A17Z&ske=2024-04-01T00%3A25%3A17Z&sks=b&skv=2021-08-06&sig=FibIpxKcsldBSPmXpDjmNb5iHEsidmMIswaVeLx/8rA%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-jonizfKc4vcTtkCzuDghtEPU/user-uvmBF0yZszYexevqgP2CMfaG/img-36uwAsgrjS8NIiPE43rTwLDb.png?st=2024-03-31T13%3A38%3A00Z&se=2024-03-31T15%3A38%3A00Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-31T00%3A17%3A32Z&ske=2024-04-01T00%3A17%3A32Z&sks=b&skv=2021-08-06&sig=w5dNQxtfsiIF1BqcMrMkS%2B7QXNsyLMxPx4Frha6AWSc%3D"
 ]);
-const [audioFiles, setAudioFiles] = useState([
-        "audio 0.mp3",
-        "audio 1.mp3",
-        "audio 2.mp3",
-        "audio 3.mp3",
-        "audio 4.mp3",
-        "audio 5.mp3",
-        "audio 6.mp3",
-        "audio 7.mp3",
-        "audio 8.mp3",
-        "audio 9.mp3",
-        "audio 10.mp3"
-]);
-const [audioIndex, setAudioIndex] = useState(0);
-const [index, setIndex] = useState(0);
-const canvasRef = useRef(null);
-const audioRef = useRef(new Audio());
+  const [audioFiles, setAudioFiles] = useState([
+    "https://audio.jukehost.co.uk/CpIJHXGe8kFrF0pbp0g7oWN8XdrCEl9B", 
+    "https://audio.jukehost.co.uk/p5ZV3XFpy2tzuilPu6QTKG5wMhJxu7bG",
+    "https://audio.jukehost.co.uk/5yvNOo3UvNOMErZRsSsuGbZ6eDXJXAyG",
+    "https://audio.jukehost.co.uk/yOxyNC9IWiUDUnbrh0AaHk7clVjiXqL0",
+    "https://audio.jukehost.co.uk/TxmIyYj02Q6w9f7zojHnt3NDpMA2WbYP",
+    "https://audio.jukehost.co.uk/TDmZnv5A2QewGEOvb96biLHdfHDj0bSV",
+    "https://audio.jukehost.co.uk/TBpkXbLiGy3rWh8pNDpUK26OeuvyNFTS",
+    "https://audio.jukehost.co.uk/p0lZskaFWDTwX73MF2LSWmY7hdqGRpLP",
+    "https://audio.jukehost.co.uk/A8kTFYSydLcx7WSEzWdRp5xmIUaEtniY",
+    "https://audio.jukehost.co.uk/KCy9669ZrZKqoWWk6BDEVsAwsFukKOvg",
+    "https://audio.jukehost.co.uk/PueNxxKtwkBmYBloAPlcVXdu6LQ0g9OU"
 
-useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [images.length]);
+  ]);
+  const [audioIndex, setAudioIndex] = useState(0);
+  const [isStarted, setIsStarted] = useState(false);
+  const canvasRef = useRef(null);
+  const audioRef = useRef(new Audio());
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     const image = new Image();
-    image.src = images[index];
+    image.src = images[audioIndex]; // Use audioIndex to sync images with audio
     image.onload = () => {
-      const maxWidth = 1000; // Maximum width
-      const maxHeight = 800; // Maximum height
+      const maxWidth = 1000; 
+      const maxHeight = 800; 
       const ratio = Math.min(maxWidth / image.naturalWidth, maxHeight / image.naturalHeight);
-
       const scaledWidth = image.naturalWidth * ratio;
       const scaledHeight = image.naturalHeight * ratio;
 
@@ -60,29 +51,38 @@ useEffect(() => {
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(image, 0, 0, scaledWidth, scaledHeight);
     };
-  }, [index]); 
+  }, [audioIndex, images]); // Depend on audioIndex
 
   useEffect(() => {
-    const audio = audioRef.current;
-    audio.src = audioFiles[audioIndex]; 
+    if (!isStarted) return;
 
-    audio.play() 
-      .then(() => {
+    const audio = audioRef.current;
+    audio.src = audioFiles[audioIndex];
+    var playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
         audio.addEventListener('ended', () => {
           setAudioIndex((currentAudioIndex) => (currentAudioIndex + 1) % audioFiles.length);
         });
       })
       .catch((error) => console.log("Audio play failed", error));
+    }
 
     return () => {
-      audio.pause(); 
+      audio.pause();
       audio.removeEventListener('ended', () => {});
     };
-  }, [audioIndex, audioFiles.length]); 
+  }, [audioIndex, audioFiles.length, isStarted]);
+
+  const handleStart = () => {
+    setIsStarted(true);
+  };
 
   return (
     <div className="gallery">
-      <canvas ref={canvasRef} alt={`Image ${index}`} />
+      {!isStarted && <button onClick={handleStart} type="submit">Start</button>}
+      <canvas ref={canvasRef} width="1000" height="800"></canvas>
     </div>
   );
 }

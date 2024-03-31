@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import url_for
+import uuid
 from flask_cors import CORS
 import os
 import openai
@@ -11,6 +13,7 @@ import requests
 import re
 
 app = Flask(__name__)
+app = Flask(__name__, static_folder='../client/build/static',static_url_path='/static')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -23,6 +26,9 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 # Initialize the OpenAI client
 client = openai.OpenAI()
 
+@app.route('/')
+def serve():
+    return send_from_directory('../client/build', 'index.html')
 
 def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0.2, max_tokens=1000):
     """
@@ -88,6 +94,10 @@ def generateTTS(prompt, name, voice):
     ) as response:
         response.stream_to_file(file_path)
 
+@app.route('/api/audio-files')
+def get_audio_files():
+    audio_files = [url_for('static', filename='audio 0.mp3')]
+    return jsonify(audio_files)
 
 
 @app.route("/members", methods=['GET', 'POST'])
