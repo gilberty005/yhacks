@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Menu = () => (
     <>
     <p><Link to="/">Home</Link></p>
-    <p><Link to="/contact">Contact</Link></p>
+    <p><Link to="/contact">Lesson Generator</Link></p>
     </>
 );
 
@@ -23,16 +23,7 @@ const Navbar = ({ signOut }) => {
                 </div>
             </div>
             <div className="gilbert__navbar_menu">
-            {toggleMenu
-                ? <RiCloseLine color="#fff" size={27} onClick={() => setToggleMenu(false)} />
-                : <RiMenu3Line color="#fff" size={27} onClick={() => setToggleMenu(true)} />}
-            {toggleMenu && (
-                <div className="gilbert__navbar-menu_container scale-up-center">
-                    <div className="gilbert__navbar-menu_container-links"> 
-                        <Menu />
-                    </div>
-                </div>
-            )}
+            
             </div>
         </div>
     );

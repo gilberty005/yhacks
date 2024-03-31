@@ -5,8 +5,7 @@ const initialFormData = {
   age_group: "",
   subject: "",
   topic: "",
-  lesson_plan: "",
-  responseMessage: "" 
+  responseMessage: ""
 };
 
 export function Contact() {
@@ -25,16 +24,17 @@ export function Contact() {
     e.preventDefault();
     const jsonData = JSON.stringify(formData);
     try {
-      const response = await fetch("http://127.0.0.1:5000/members", { // Ensure this URL matches your Flask server's address
+      const response = await fetch("http://127.0.0.1:5000/members", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
-        body: jsonData,
+        body: jsonData
       });
       const data = await response.json();
-      console.log(data);  
-      setFormData(prevData => ({ ...prevData, responseMessage: data.data }));  // Update state with backend response
+      console.log(data);
+      // Update state with backend response
+      setFormData(prevData => ({ ...prevData, responseMessage: data.data }));
     } catch (error) {
       console.error("Error posting form data:", error);
     }
@@ -44,57 +44,60 @@ export function Contact() {
     <>
       <div className="content-container">
         <div className="form-container">
-          <h2 className="gradient__text">Let's Get Your Lesson Plan Done!</h2>
+          <h1 className="gradient__text">Let's Get Your Lesson Plan Done!</h1>
           <form onSubmit={handleSubmit} className="contact-form">
-            <label htmlFor="age">Age:</label><br />
+            <label htmlFor="age">AGE</label><br />
             <input
               type="number"
+              min={0}
+              max={100}
               id="age_group"
               name="age_group"
               required
               value={formData.age_group}
               onChange={handleChange}
+              className="form-category"
             /><br />
-            <label htmlFor="subject">Subject:</label><br />
+            <label htmlFor="subject">SUBJECT</label><br />
             <input
               type="text"
+              minLength={2}
+              maxLength={30}
               id="subject"
               name="subject"
               required
               value={formData.subject}
               onChange={handleChange}
             /><br /><br />
-            <label htmlFor="topic">Topic:</label><br />
+            <label htmlFor="topic">TOPIC</label><br />
             <input
               type="text"
               id="topic"
+              maxLength={50}
               name="topic"
               required
               value={formData.topic}
               onChange={handleChange}
             /><br /><br />
-            <label htmlFor="lesson_plan">Lesson Plan:</label><br />
-            <textarea
-              id="lesson_plan"
-              name="lesson_plan"
-              value={formData.lesson_plan}
-              onChange={handleChange}
-            /><br /><br />
             <input
               type="submit"
-              className="submit focus-style"
-              value="Make a Video!"
+              className="submit-focus-style"
+              value="MAKE A LESSON PLAN!"
             />
           </form>
         </div>
-        
         {formData.responseMessage && (
         <div className="response-container">
-          <h3>Response from Server:</h3>
-          <p>{formData.responseMessage}</p>
+          <h3>Your New Lesson Plan:</h3>
+          {/* Modified part to display responseMessage with new lines for "-" and numbers */}
+          <p>
+            {formData.responseMessage.split('').map((char, index) => (
+              /[-0-9]/.test(char) ? [<br key={index} />, char] : char
+            ))}
+          </p>
         </div>
-      )}
-    </div>
-  </>
-);
+        )}
+      </div>
+    </>
+  );
 }
