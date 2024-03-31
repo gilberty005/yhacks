@@ -1,0 +1,7 @@
+.gallery {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100vh; /* Take up full viewport height */
+    width: 100vw; /* Take up full viewport width */
+  }

@@ -6,6 +6,7 @@ import Footer from './containers/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import ScriptPage from './pages/script/script.js';
 import Video from './pages/videofolder/video.js'
+import Gallery from './pages/videoplayer/videoplayer.js'
 
 const App = ( ) => {
   return (
@@ -16,6 +17,7 @@ const App = ( ) => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/script" element={<ScriptPage />} />
         <Route path="/video" element = {<Video />} /> 
+        <Route path="/player" element = {<Gallery />} /> 
       </Routes>
       <Footer />
     </Router>

@@ -23,8 +23,25 @@ const Video = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const jsonData = JSON.stringify(formData);
-        // Add your submission logic here
-        // For example, you can navigate or perform an action based on the form data
+        try{
+            const response = await fetch("http://127.0.0.1:5000/generate_video",{
+                method: "POST",
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: jsonData
+              });
+            if (response.ok) { 
+                const data = await response.json();
+                console.log(data);
+                localStorage.setItem('formData', jsonData);
+                navigate('/script', { state: { generatedText: data.data } });
+            } else {
+                console.error("Server responded with status:", response.status);
+            }
+        } catch(error) {
+            console.error("Error forming video:", error);
+        }
     };
 
     return (

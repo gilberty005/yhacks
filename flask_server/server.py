@@ -23,6 +23,7 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 # Initialize the OpenAI client
 client = openai.OpenAI()
 
+
 def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0.2, max_tokens=1000):
     """
     Get a completion for a given prompt using the specified model and an array of messages.
@@ -73,14 +74,20 @@ def generateImage(prompt):
         n=1,
         )
 
-def generateTTS(prompt,name,voice):
+def generateTTS(prompt, name, voice):
+    audio_directory = 'static/audio'  # Define the directory to save audio files
+    if not os.path.exists(audio_directory):  # Check if the directory exists
+        os.makedirs(audio_directory)  # Create the directory if it does not exist
+    file_path = os.path.join(audio_directory, f"{name}.mp3")  # Construct the file path
+
     with client.audio.speech.with_streaming_response.create(
         model="tts-1",
         voice=voice,
         input=prompt,
         response_format='mp3'
     ) as response:
-        response.stream_to_file(name)
+        response.stream_to_file(file_path)
+
 
 
 @app.route("/members", methods=['GET', 'POST'])
@@ -190,6 +197,49 @@ def generate_script():
         return jsonify({"status": "success", "data": response_content}), 200
     else:
         return jsonify({"ERROR": ["ERROR IN INPUT"]})
+    
+@app.route("/generate_video", methods=['GET','POST'])
+def generate_video():
+    if request.method == 'POST':
+        data = request.json
+        script = data.get('script', '')
+        #script = """````[The video opens with a shot of a lush green forest with sunlight filtering through the leaves. A narrator begins speaking as the camera zooms in on a single leaf.]\n\nNarrator: "Welcome to our lesson on understanding photosynthesis, the remarkable process that sustains life on Earth by converting light energy into chemical energy. Today, we will delve into the stages, importance, variations, and even the exciting world of artificial photosynthesis."\n\n[Cut to a classroom setting with a whiteboard and the teacher standing ready to begin the lesson.]\n\nTeacher: "Let's start by defining photosynthesis. It's the process by which plants, algae, and some bacteria harness light energy to produce oxygen and glucose, fueling the entire ecosystem."\n\n[The whiteboard displays the definition of photosynthesis as the teacher elaborates.]\n\nTeacher: "Photosynthesis is crucial for maintaining the balance of gases in our atmosphere and providing energy for all living organisms. Now, let's explore the stages of this fascinating process."\n\n[Cut to a diagram showing the stages of photosynthesis as the teacher explains.]\n\nTeacher: "Photosynthesis occurs in two main stages: the light-dependent reactions and the light-independent reactions. The chloroplasts play a key role in these processes, converting light energy into chemical energy."\n\n[The teacher continues to explain the specific processes involved in each stage, emphasizing the importance of each step.]\n\nTeacher: "Different types of photosynthesis, such as the C3 and C4 pathways, have evolved to adapt to varying environmental conditions. These mechanisms optimize the efficiency of photosynthesis under different circumstances."\n\n[Transition to a discussion on the role of photosynthesis in ecosystems.]\n\nTeacher: "In ecosystems, photosynthesis is essential for producing oxygen, capturing carbon dioxide, and providing energy for organisms. It's a fundamental process that sustains life as we know it."\n\n[Cut to a segment on the efficiency and variations in photosynthesis.]\n\nTeacher: "Factors like light intensity, temperature, and CO2 levels influence the efficiency of photosynthesis. Plants have developed strategies like the C4 and CAM pathways to thrive in diverse environments."\n\n[The teacher introduces the concept of artificial photosynthesis and its potential applications.]\n\nTeacher: "Artificial photosynthesis mimics natural processes to capture and store solar energy. It holds promise as a sustainable energy source, offering a carbon-neutral solution to our energy needs."\n\n[The video transitions to an interactive activity where students label a diagram of the photosynthesis process.]\n\nTeacher: "Now, let's put our knowledge to the test. In small groups, label the different stages and components of photosynthesis on your handouts. Discuss the significance of each stage and how they contribute to the overall process."\n\n[The video concludes with a reflection on the impact of photosynthesis and the potential of artificial photosynthesis.]\n\nTeacher: "As we wrap up, remember the vital role photosynthesis plays in our world. Reflect on how this process shapes our environment and consider the exciting possibilities of artificial photosynthesis in shaping a sustainable future."\n\n[Narrator speaks as the video fades to black.]\n\nNarrator: "By understanding photosynthesis, we gain insight into the intricate web of life on Earth and the potential for innovative solutions to environmental challenges. Thank you for joining us on this enlightening journey."\n\n[End of video.]````"""
+
+        scriptPieces = script.split("\n\n")
+        captions = []
+        narrations = []
+        for p in scriptPieces:
+            if(p[0:1] == "["):
+                captions.append(p)
+            else:
+                narrations.append(p)
+
+        imageUrls = []
+        for c in range(len(captions)):
+            try:
+                response = generateImage(captions[c])
+                imageUrl = response.data[0].url
+                imageUrls.append(imageUrl)
+            except:
+                print("Unable to make image for: " + captions[c])
+
+        audios = []
+        characters = []
+        voices = ["fable", "onyx", "nova", "alloy", "echo", "simmer"]
+        for n in range(len(narrations)):
+            fileName = "audio " + str(n) + ".mp3"
+            text = narrations[n]
+            speaker = text[0:text.index(":")]
+            if(speaker not in characters):
+                characters.append(speaker)
+            generateTTS(text[text.index(":") + 1:], fileName, voices[characters.index(speaker)])
+            audios.append(fileName)
+
+        return jsonify({"image_urls": imageUrls, "audio_files": audios}), 200
+
+    else:
+        return jsonify({"error": "Invalid request method"}), 405
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
