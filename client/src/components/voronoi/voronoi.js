@@ -1,15 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+// Cache object to store generated Voronoi stipplings
+const stipplingCache = {};
+
 export default function Voronoi({ imageUrl }) {
   const canvasRef = useRef(null);
   const [points, setPoints] = useState([]);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    const width = 500; 
-    const height = 600; 
-    const n = Math.round(width * height / 40); 
-    let i = 0;
+    // Check if the Voronoi stippling for the current image URL exists in the cache
+    if (stipplingCache[imageUrl]) {
+      setPoints(stipplingCache[imageUrl]); // Set points from cache
+      setImageLoaded(true); // Mark image as loaded
+      return;
+    }
+
+    const width = 500;
+    const height = 600;
+    const n = Math.round(width * height / 40);
     const context = canvasRef.current.getContext('2d');
     const workerScript = URL.createObjectURL(new Blob([`
       importScripts("https://cdn.observableusercontent.com/npm/d3-delaunay@6.0.4/dist/d3-delaunay.min.js");
@@ -82,34 +91,35 @@ export default function Voronoi({ imageUrl }) {
       data.height = height;
 
       worker.postMessage({ data, width, height, n });
-      setImageLoaded(true); 
+      setImageLoaded(true);
     };
 
     worker.addEventListener('message', ({ data }) => {
       setPoints(data);
+      stipplingCache[imageUrl] = data; // Cache the generated points
     });
 
     return () => {
       worker.terminate();
       URL.revokeObjectURL(workerScript);
     };
-  }, []);
+  }, [imageUrl]); // Add imageUrl to the dependency array
 
   useEffect(() => {
-    if (imageLoaded && imageLoaded && points.length > 0) {
+    if (imageLoaded && points.length > 0) {
       const context = canvasRef.current.getContext('2d');
-      if(imageLoaded == true){
-        canvasRef.current.style.display = 'block'; 
+      if (imageLoaded === true) {
+        canvasRef.current.style.display = 'block';
       }
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-      const gradient = context.createLinearGradient(0, 0, canvasRef.current.width, 0); 
-      gradient.addColorStop(0, '#488B8A');   
-      gradient.addColorStop(1, '#9B75D9'); 
+      const gradient = context.createLinearGradient(0, 0, canvasRef.current.width, 0);
+      gradient.addColorStop(0, '#488B8A');
+      gradient.addColorStop(1, '#9B75D9');
 
       context.fillStyle = gradient;
       canvasRef.current.style.display = 'content';
-      // TODO: adjust the speed of the points forming 
+      // TODO: adjust the speed of the points forming
       for (let i = 0; i < points.length; i += 2) {
         const x = points[i];
         const y = points[i + 1];
@@ -119,7 +129,7 @@ export default function Voronoi({ imageUrl }) {
         context.fill();
       }
     }
-  }, [imageLoaded,imageLoaded, points]);
+  }, [imageLoaded, points]);
 
-  return <canvas ref={canvasRef} width="500" height="600" style={{ display: 'none' }}/>;
+  return <canvas ref={canvasRef} width="500" height="600" style={{ display: 'none' }} />;
 }

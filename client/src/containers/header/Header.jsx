@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './header.css'; 
 import Typed from 'typed.js';
-import { useEffect, useRef } from "react";
-import Voronoi from '../../components/voronoi/voronoi'
+import { useRef } from "react";
+import Voronoi from '../../components/voronoi/voronoi';
 import { Link } from 'react-router-dom';
-import gilbert from '../../assets/images.jpeg'
+import gilbert from '../../assets/teacher2.jpeg';
+import script from '../../assets/script.jpeg';
+import pic from '../../assets/pic.jpeg';
+
+
 const TypingText = () => {
     const el = useRef(() => {
 
@@ -38,8 +42,45 @@ const TypingText = () => {
       </div>
     );
   };
+  const generateVoronoiStippling = async (imageUrl) => {
+    // Generate the Voronoi stippling here and return the URL
+    // For simplicity, let's assume it returns the URL of the generated stippling
+    return imageUrl; // For now, return the same image URL
+  };
+  
 
-const Header = () => (
+const Header = () => {
+  const [imageIndex, setImageIndex] = useState(0); // Index of the currently displayed image
+  const [stipplings, setStipplings] = useState([]); // Array containing the pre-generated Voronoi stipplings
+  const [imageLoaded, setImageLoaded] = useState(false); // Track if the stippled image is loaded
+
+  useEffect(() => {
+    // Preload Voronoi stippled images
+    const preloadStippledImages = async () => {
+      const stippledImages = await Promise.all([
+        generateVoronoiStippling(gilbert),
+        generateVoronoiStippling(script),
+        generateVoronoiStippling(pic),
+      ]);
+      setStipplings(stippledImages);
+      setImageLoaded(true); // Set imageLoaded to true when stippled images are loaded
+    };
+
+    preloadStippledImages();
+  }, []);
+
+  const handleHoverEdu = () => {
+    setImageIndex(0); // Set the index to display the stippled image for educator
+  };
+
+  const handleHoverScript = () => {
+    setImageIndex(1); // Set the index to display the stippled image for student
+  };
+
+  const handleHoverPic = () => {
+    setImageIndex(2); // Set the index to display the stippled image for video 
+  };
+  return(
     <div className="gilbert__header section__padding">
       <div className="gilbert__header-content">
         <h1 className="gradient__text">Hi, there!</h1>
@@ -48,9 +89,9 @@ const Header = () => (
           </h1>
         
         <div className="gilbert__header-content__input">
-          <Link to="/contact"><button className="edu-btn" type="button">Lesson</button></Link>
-          <Link to="/script"><button className="stu-btn" type="button">Script</button></Link>
-          <Link to="/video"><button className="stu-btn" type="button">Video</button></Link>
+          <Link to="/contact"><button className="edu-btn" type="button" onMouseEnter={handleHoverEdu}>Lesson</button></Link>
+          <Link to="/script"><button className="stu-btn" type="button" onMouseEnter={handleHoverScript}>Script</button></Link>
+          <Link to="/video"><button className="stu-btn" type="button"onMouseEnter={handleHoverPic}>Video</button></Link>
         </div>
           <p className='subtext'>Welcome to the Future of Education!</p>
           <p className='quote'>
@@ -58,9 +99,13 @@ const Header = () => (
         </p>
       </div>
       <div className="gilbert__header-image">
-        <Voronoi imageUrl={gilbert} />
+        {/* Conditionally render Voronoi component only when image is loaded */}
+        {imageLoaded && stipplings.length > 0 && (
+          <Voronoi imageUrl={stipplings[imageIndex]} />
+        )}
       </div>
     </div>
   );
+};
 
 export default Header;

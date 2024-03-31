@@ -35,7 +35,7 @@ const Video = () => {
                 const data = await response.json();
                 console.log(data);
                 localStorage.setItem('formData', jsonData);
-                navigate('/script', { state: { generatedText: data.data } });
+                navigate('/player', { state: { generatedText: data.data } });
             } else {
                 console.error("Server responded with status:", response.status);
             }
