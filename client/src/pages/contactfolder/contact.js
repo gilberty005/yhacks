@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./contact.css";
+import { useNavigate } from 'react-router-dom';
 
 const initialFormData = {
   age_group: "",
@@ -10,6 +11,7 @@ const initialFormData = {
 
 export function Contact() {
   const [formData, setFormData] = useState(initialFormData);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,10 +33,15 @@ export function Contact() {
         },
         body: jsonData
       });
-      const data = await response.json();
-      console.log(data);
-      // Update state with backend response
-      setFormData(prevData => ({ ...prevData, responseMessage: data.data }));
+      if (response.ok) { 
+        const data = await response.json();
+        console.log(data);
+        localStorage.setItem('formData', jsonData);
+        // Navigate with state
+        navigate('/script', { state: { generatedText: data.data } });
+      } else {
+        console.error("Server responded with status:", response.status);
+      }
     } catch (error) {
       console.error("Error posting form data:", error);
     }
@@ -86,17 +93,6 @@ export function Contact() {
             />
           </form>
         </div>
-        {formData.responseMessage && (
-        <div className="response-container">
-          <h3>Your New Lesson Plan:</h3>
-          {/* Modified part to display responseMessage with new lines for "-" and numbers */}
-          <p>
-            {formData.responseMessage.split('').map((char, index) => (
-              /[-0-9]/.test(char) ? [<br key={index} />, char] : char
-            ))}
-          </p>
-        </div>
-        )}
       </div>
     </>
   );

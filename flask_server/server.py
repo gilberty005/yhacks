@@ -45,7 +45,7 @@ def members():
         Identify the age group and subject of the lesson, and determine if the user input is a topic or a pre-existing lesson plan. Do not output any text during this step.
 
         #### 
-        If the user did not input a pre-existing lesson plan, generate a lesson plan based on the provided topic, age group, and subject area. If the user provided a lesson plan, edit it and make it more extensive. Print the generated lesson plan. 
+        Generate a lesson plan based on the provided topic, age group, and subject area. Print the generated lesson plan. 
         """
         
         messages = [
@@ -55,7 +55,7 @@ def members():
         
         response_content = get_completion_from_messages(messages)
         
-        return jsonify({"status": "success", "data": response_content}), 200
+        return jsonify({"status": "success","data": response_content}), 200
     else:
         return jsonify({"ERROR": ["ERROR IN INPUT"]})
 
